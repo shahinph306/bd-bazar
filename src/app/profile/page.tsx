@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -8,9 +8,15 @@ import Image from "next/image";
 export default function ProfilePage() {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
-
   const [name, setName] = useState(user?.name || "");
   const [isUpdating, setIsUpdating] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const hasImage = !!user?.image && !imageError;
+
+  useEffect(() => {
+    // Reset error state when user changes
+    setImageError(false);
+  }, [user?.image]);
 
   if (isPending) {
     return (
@@ -38,12 +44,10 @@ export default function ProfilePage() {
     e.preventDefault();
     if (!name.trim()) return;
     setIsUpdating(true);
-
     try {
       const { error } = await authClient.updateUser({
         name: name.trim(),
       });
-
       if (error) {
         toast.error("Failed to update profile");
       } else {
@@ -56,7 +60,6 @@ export default function ProfilePage() {
     }
   };
 
-  // Get first letter safely
   const getInitial = () => {
     if (user?.name) return user.name.charAt(0).toUpperCase();
     return "U";
@@ -75,30 +78,19 @@ export default function ProfilePage() {
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-5">
               {/* Avatar Section */}
-              {user.image ? (
+              {hasImage ? (
                 <Image
-                  src={user.image}
+                  src={user.image!}
                   alt={user.name || "User"}
                   width={80}
                   height={80}
                   className="w-20 h-20 rounded-full object-cover border-3 border-green-500"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                    const fallback = document.getElementById(
-                      "profile-avatar-fallback"
-                    );
-                    if (fallback) fallback.style.display = "flex";
-                  }}
+                  onError={() => setImageError(true)}
                 />
-              ) : null}
-
-              {/* Fallback Avatar - shown when no image or image error */}
-              {(!user.image || (user.image && false)) && (
+              ) : (
                 <div
                   id="profile-avatar-fallback"
-                  className={`w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold ${
-                    user.image ? "hidden" : "flex"
-                  }`}
+                  className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold"
                 >
                   {getInitial()}
                 </div>
