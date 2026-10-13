@@ -24,18 +24,21 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen bg-[#f0f5f0] flex flex-col items-center justify-center">
         <p className="text-gray-600 mb-4">Please sign in to view your profile</p>
-        <Link href="/auth/sign-in" className="bg-green-600 text-white px-4 py-2 rounded-lg">
+        <Link
+          href="/auth/sign-in"
+          className="bg-green-600 text-white px-4 py-2 rounded-lg"
+        >
           Sign In
         </Link>
       </div>
     );
   }
 
-  const handleUpdateName = async (e: React.SubmitEvent<HTMLElement>) => {
+  const handleUpdateName = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!name.trim()) return;
-
     setIsUpdating(true);
+
     try {
       const { error } = await authClient.updateUser({
         name: name.trim(),
@@ -53,16 +56,25 @@ export default function ProfilePage() {
     }
   };
 
+  // Get first letter safely
+  const getInitial = () => {
+    if (user?.name) return user.name.charAt(0).toUpperCase();
+    return "U";
+  };
+
   return (
     <main className="min-h-screen bg-[#f0f5f0] py-8 px-4">
       <div className="container mx-auto max-w-2xl">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">My Profile</h1>
-        <p className="text-gray-500 text-sm mb-8">Manage your account information here.</p>
+        <p className="text-gray-500 text-sm mb-8">
+          Manage your account information here.
+        </p>
 
-
+        {/* Profile Card */}
         <div className="bg-white rounded-2xl border border-[#dce5dc] p-6 mb-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-5">
+              {/* Avatar Section */}
               {user.image ? (
                 <Image
                   src={user.image}
@@ -71,25 +83,37 @@ export default function ProfilePage() {
                   height={80}
                   className="w-20 h-20 rounded-full object-cover border-3 border-green-500"
                   onError={(e) => {
+                    e.currentTarget.style.display = "none";
                     const fallback = document.getElementById(
                       "profile-avatar-fallback"
                     );
                     if (fallback) fallback.style.display = "flex";
-                    e.currentTarget.style.display = "none";
                   }}
                 />
-              ) : null} : (
-              <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold">
-                {user.name?.charAt(0).toUpperCase() || "U"}
-              </div>
-              )
+              ) : null}
 
+              {/* Fallback Avatar - shown when no image or image error */}
+              {(!user.image || (user.image && false)) && (
+                <div
+                  id="profile-avatar-fallback"
+                  className={`w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold ${
+                    user.image ? "hidden" : "flex"
+                  }`}
+                >
+                  {getInitial()}
+                </div>
+              )}
+
+              {/* User Info */}
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>
+                <h2 className="text-xl font-semibold text-gray-900">
+                  {user.name}
+                </h2>
                 <p className="text-sm text-gray-500 mt-1">{user.email}</p>
               </div>
             </div>
 
+            {/* Sign Out Button */}
             <button
               onClick={async () => {
                 await authClient.signOut();
@@ -102,13 +126,17 @@ export default function ProfilePage() {
           </div>
         </div>
 
-  
+        {/* Update Form */}
         <div className="bg-white rounded-2xl border border-[#dce5dc] p-6">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Update Information</h2>
-
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+            Update Information
+          </h2>
           <form onSubmit={handleUpdateName} className="space-y-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
                 Name
               </label>
               <input
@@ -121,7 +149,6 @@ export default function ProfilePage() {
                 required
               />
             </div>
-
             <button
               type="submit"
               disabled={isUpdating}
