@@ -117,6 +117,7 @@ export default function ProfilePage() {
               }}
               className="px-4 py-2 border border-red-200 text-red-600 rounded-lg text-sm hover:bg-red-50 transition-colors"
             >
+              log out
               Sign Out
             </button>
           </div>
