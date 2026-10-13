@@ -25,8 +25,8 @@ const RisingProductsPrices = async () => {
   const products: Product[] = Array.isArray(result)
     ? result as Product[]
     : (
-        result as { data?: Product[] }
-      ).data ?? [];
+      result as { data?: Product[] }
+    ).data ?? [];
 
   const topProducts = products
     .filter((product) => product.change?.dir === 'up')
@@ -34,7 +34,7 @@ const RisingProductsPrices = async () => {
     .slice(0, 6);
 
   return (
-    <section className="mx-auto max-w-7xl">
+    <section className="mx-auto container px-4 py-2">
       <h1 className="mb-4 flex items-center gap-2 text-xl font-bold text-gray-900">
         <span className="text-red-500">▲</span>
         Prices have gone up today
@@ -45,10 +45,9 @@ const RisingProductsPrices = async () => {
           const name =
             product.nameEn ??
             product.name ??
-            product.slug.replaceAll('-', ' ');
+            product.slug.replaceAll("-", " ");
 
           return (
-            // ✅ Link দিয়ে মুড়ে দিয়েছি
             <Link
               key={product.id}
               href={`/product/${product.id}`}
@@ -58,6 +57,7 @@ const RisingProductsPrices = async () => {
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#f0f5f0] text-2xl">
                   {product.image}
                 </div>
+
                 <div>
                   <h2 className="font-semibold capitalize text-gray-900">
                     {name}
@@ -75,9 +75,10 @@ const RisingProductsPrices = async () => {
                   </p>
                   <p className="text-lg font-bold text-gray-900">
                     <span className="mr-1 text-sm font-normal">৳</span>
-                    {product.today.toLocaleString('en-IN')}
+                    {product.today.toLocaleString("en-IN")}
                   </p>
                 </div>
+
                 <span className="inline-flex items-center gap-1 rounded-full bg-red-50 px-3 py-1 text-xs font-semibold text-red-500">
                   ▲ {product.change.pct}%
                 </span>
