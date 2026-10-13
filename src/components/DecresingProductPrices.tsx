@@ -36,7 +36,7 @@ const DecreasingProductPrices = async () => {
         .slice(0, 6);
 
     return (
-        <section className="mx-auto container px-4 py-6">
+        <section  className="w-full py-2">
             <h1 className="mb-4 flex items-center gap-2 text-xl font-bold text-gray-900">
                 <span className="text-green-600">▼</span>
                 Prices have come down today

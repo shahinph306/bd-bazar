@@ -1,13 +1,18 @@
-import React from 'react';
 
 const Footer = () => {
-    return (
-        <div className='flex justify-between mx-auto container text-gray-700 bg-gray-200 py-4 mt-6'>
-            <h3>Market Price: The price of essential commodities at a glance.</h3>
+  return (
+    <footer className="mt-6 w-full bg-gray-200 text-gray-700">
+      <div className="mx-auto container flex w-full flex-col justify-between gap-3 px-4 py-4 sm:flex-row sm:items-center">
+        <p className="text-sm">
+          Market Price: The price of essential commodities at a glance.
+        </p>
 
-            <h3>All prices are possible; Varies depending on market conditions.</h3>
-        </div>
-    );
+        <p className="text-sm sm:text-right">
+          All prices are approximate and may vary depending on market conditions.
+        </p>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
