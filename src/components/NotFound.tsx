@@ -1,29 +1,36 @@
+
 import Link from "next/link";
 
-export default function NotFoundPage({
-  title = "Product Not Found",
-  message = "The product you are looking for does not exist or has been removed.",
-  backText = "Back to Home",
-  backHref = "/",
-}: {
-  title?: string;
-  message?: string;
-  backText?: string;
-  backHref?: string;
-}) {
+export default function NotFound() {
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
-      <div className="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center text-3xl mb-4">
-        😕
+    <section className="flex min-h-[420px] flex-1 flex-col items-center justify-center bg-[#F0F5F0] px-4 py-12 text-center">
+      <div className="mb-3 text-6xl" role="img" aria-label="Shopping basket">
+        🛒
       </div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-2">{title}</h2>
-      <p className="text-gray-500 max-w-md mb-6">{message}</p>
-      <Link
-        href={backHref}
-        className="bg-green-600 text-white px-6 py-2.5 rounded-lg hover:bg-green-700 transition-colors"
-      >
-        ← {backText}
-      </Link>
-    </div>
+
+      <h1 className="mb-3 text-2xl font-bold text-gray-900 sm:text-3xl">
+        The page could not be found
+      </h1>
+
+      <p className="mb-5 max-w-xl text-sm leading-6 text-gray-500 sm:text-base">
+        The product or page you're looking for has been removed or never was.
+      </p>
+
+      <div className="flex flex-wrap items-center justify-center gap-2">
+        <Link
+          href="/"
+          className="rounded-lg bg-green-700 px-5 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-green-800"
+        >
+          Go to Home Page
+        </Link>
+
+        <Link
+          href="/auth/sign-in"
+          className="rounded-lg border border-gray-800 px-5 py-3 text-sm font-semibold text-gray-900 transition hover:bg-gray-200"
+        >
+          Go to sign in Page
+        </Link>
+      </div>
+    </section>
   );
 }
