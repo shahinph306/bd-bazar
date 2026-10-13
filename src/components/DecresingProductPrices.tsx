@@ -42,7 +42,7 @@ const DecreasingProductPrices = async () => {
         Prices have come down today
       </h1>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 max-auto container">
         {topProducts.map((product) => {
           const name =
             product.nameEn ??
