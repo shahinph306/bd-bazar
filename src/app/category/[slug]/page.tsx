@@ -117,7 +117,7 @@ export default async function CategoryPage({
 
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="mb-1 text-xs text-gray-500">Today's Price</p>
+                      <p className="mb-1 text-xs text-gray-500">Today&apos;s Price</p>
                       <p className="text-lg font-bold text-gray-900">
                         <span className="mr-1 text-sm font-normal">৳</span>
                         {product.today.toLocaleString("en-IN")}

@@ -82,7 +82,7 @@ export default function ProfilePage() {
               <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold">
                 {user.name?.charAt(0).toUpperCase() || "U"}
               </div>
-              )}
+              )
 
               <div>
                 <h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>

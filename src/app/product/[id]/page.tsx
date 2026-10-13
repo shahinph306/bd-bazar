@@ -141,7 +141,7 @@ export default async function ProductPage({
           </div>
 
           <div className="text-center bg-[#f0f5f0] rounded-xl p-4 min-w-[140px]">
-            <p className="text-xs text-gray-500">Today's Price</p>
+            <p className="text-xs text-gray-500">Today&apos;s Price</p>
             <p className="text-3xl font-bold text-gray-900 mt-1">{product.today}</p>
             <p className="text-xs text-gray-500 mt-1">Money/{unitLabel}</p>
             <p className={`text-sm font-medium mt-1 ${
@@ -175,7 +175,7 @@ export default async function ProductPage({
 
         <div className="bg-white rounded-2xl border border-[#dce5dc] overflow-hidden">
           <div className="p-4 border-b border-[#dce5dc] font-bold text-gray-900">
-            Today's Market-Based Prices
+            Today&apos;s Market-Based Prices
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
