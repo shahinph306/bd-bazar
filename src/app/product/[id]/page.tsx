@@ -121,14 +121,13 @@ export default async function ProductPage({
   return (
     <main className="min-h-screen bg-[#f0f5f0] py-6 px-4">
       <div className="container mx-auto max-w-6xl">
-        {/* Breadcrumb */}
+       
         <div className="text-sm text-gray-500 mb-6">
           <Link href="/" className="hover:underline">HOME</Link>
           <span> / </span>
           <span className="text-gray-800">{productName}</span>
         </div>
 
-        {/* Product Header */}
         <div className="bg-white rounded-2xl border border-[#dce5dc] p-6 mb-6 flex justify-between items-start flex-wrap gap-4">
           <div className="flex items-start gap-4">
             <div className="w-14 h-14 rounded-xl bg-[#f0f5f0] flex items-center justify-center text-2xl">
@@ -141,7 +140,6 @@ export default async function ProductPage({
             </div>
           </div>
 
-          {/* Today's Price Box */}
           <div className="text-center bg-[#f0f5f0] rounded-xl p-4 min-w-[140px]">
             <p className="text-xs text-gray-500">Today's Price</p>
             <p className="text-3xl font-bold text-gray-900 mt-1">{product.today}</p>
@@ -154,7 +152,6 @@ export default async function ProductPage({
           </div>
         </div>
 
-        {/* Price Summary */}
         <div className="bg-white rounded-2xl border border-[#dce5dc] p-6 mb-6">
           <h2 className="text-lg font-bold text-gray-900 mb-4">Price Summary</h2>
           <div className="grid grid-cols-3 gap-4">
@@ -176,7 +173,6 @@ export default async function ProductPage({
           </div>
         </div>
 
-        {/* Market Prices Table */}
         <div className="bg-white rounded-2xl border border-[#dce5dc] overflow-hidden">
           <div className="p-4 border-b border-[#dce5dc] font-bold text-gray-900">
             Today's Market-Based Prices

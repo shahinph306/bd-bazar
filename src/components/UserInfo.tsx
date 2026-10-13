@@ -1,50 +1,9 @@
-// "use client"
-// import { authClient } from '@/lib/auth-client';
-// import Link from 'next/link';
-// import React from 'react';
-
-// const UserInfo = () => {
-//     const { data: session } = authClient.useSession()
-//     const user = session?.user
-//     console.log(user);
-
-//     const handleSignOut = async()=>{
-//         await authClient.signOut();
-//     }
-
-//     return (
-//         <div className='absolute right-4 top-4 flex items-center gap-3 text-sm'>
-//             {
-//                 user ? <div className='flex justify-between gap-3 items-center'>
-//                     <div className="avatar">
-//                         <div className="ring-primary ring-offset-base-100 w-15 rounded-full ring-2 ring-offset-2">
-//                             <img alt="Tailwind-CSS-Avatar-component" src={user?.image as string} />
-//                         </div>
-//                     </div>
-//                     <h2> {user.name} </h2>
-//                     <button onClick={handleSignOut} className='btn text-red-700 btn-xs'>Sign out</button>
-
-//                 </div> : <div>
-//                     <Link href="/auth/sign-in"><button className='btn'>Sign in</button></Link>
-//                     <Link href="/auth/sign-up"><button className='btn btn-success'>Sign up</button></Link>
-//                 </div>
-//             }
-
-//         </div >
-//     );
-// };
-
-// export default UserInfo;
-
-
-
-
-
 
 "use client";
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function UserInfo() {
   const { data: session } = authClient.useSession();
@@ -70,32 +29,35 @@ export default function UserInfo() {
 
   return (
     <div className="relative">
-      {/* ✅ বাম পাশে ছবি, তারপর নাম */}
+
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="flex items-center gap-2 hover:bg-gray-50 rounded-lg px-3 py-2 transition-colors"
       >
-        {/* ছবি */}
+
         {user.image ? (
-          <img
+          <Image
             src={user.image}
             alt={user.name || "User"}
+            width={32}
+            height={32}
             className="w-8 h-8 rounded-full object-cover border-2 border-green-500"
             onError={(e) => {
-              const fallback = document.getElementById("header-avatar-fallback");
+              const fallback = document.getElementById(
+                "header-avatar-fallback"
+              );
               if (fallback) fallback.style.display = "flex";
               e.currentTarget.style.display = "none";
             }}
           />
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-sm font-bold">
-            {user.name?.charAt(0).toUpperCase() || "U"}
-          </div>
+        ) : null} : (
+        <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-sm font-bold">
+          {user.name?.charAt(0).toUpperCase() || "U"}
+        </div>
         )}
 
-        {/* নাম */}
         <span className="text-sm font-medium text-gray-800">{user.name}</span>
-        
+
         <svg
           className={`w-4 h-4 text-gray-500 transition-transform ${isMenuOpen ? "rotate-180" : ""}`}
           fill="none"
@@ -106,7 +68,6 @@ export default function UserInfo() {
         </svg>
       </button>
 
-      {/* ড্রপডাউন মেনু */}
       {isMenuOpen && (
         <>
           <div
@@ -114,7 +75,7 @@ export default function UserInfo() {
             onClick={() => setIsMenuOpen(false)}
           />
           <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-100 z-20 overflow-hidden">
-            {/* মেনুর উপরের অংশ — ছবি + নাম + ইমেইল */}
+           
             <div className="p-4 border-b border-gray-100 flex items-center gap-3">
               {user.image ? (
                 <img

@@ -1,4 +1,4 @@
-import Link from "next/link"; // ✅ Link যোগ করেছি
+import Link from "next/link"; 
 
 interface Product {
   id: number;

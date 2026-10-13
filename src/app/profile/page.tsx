@@ -3,6 +3,7 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const { data: session, isPending } = authClient.useSession();
@@ -58,28 +59,31 @@ export default function ProfilePage() {
         <h1 className="text-2xl font-bold text-gray-900 mb-2">My Profile</h1>
         <p className="text-gray-500 text-sm mb-8">Manage your account information here.</p>
 
-        {/* ✅ প্রোফাইল কার্ড — ছবি বড় করেছি */}
+
         <div className="bg-white rounded-2xl border border-[#dce5dc] p-6 mb-6">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex items-center gap-5">
-              {/* ✅ বড় সাইজের ছবি */}
               {user.image ? (
-                <img
+                <Image
                   src={user.image}
                   alt={user.name || "User"}
+                  width={80}
+                  height={80}
                   className="w-20 h-20 rounded-full object-cover border-3 border-green-500"
                   onError={(e) => {
-                    const fallback = document.getElementById("profile-avatar-fallback");
+                    const fallback = document.getElementById(
+                      "profile-avatar-fallback"
+                    );
                     if (fallback) fallback.style.display = "flex";
                     e.currentTarget.style.display = "none";
                   }}
                 />
-              ) : (
-                <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold">
-                  {user.name?.charAt(0).toUpperCase() || "U"}
-                </div>
+              ) : null} : (
+              <div className="w-20 h-20 rounded-full bg-orange-500 flex items-center justify-center text-white text-3xl font-bold">
+                {user.name?.charAt(0).toUpperCase() || "U"}
+              </div>
               )}
-              
+
               <div>
                 <h2 className="text-xl font-semibold text-gray-900">{user.name}</h2>
                 <p className="text-sm text-gray-500 mt-1">{user.email}</p>
@@ -101,7 +105,7 @@ export default function ProfilePage() {
         {/* আপডেট ফর্ম */}
         <div className="bg-white rounded-2xl border border-[#dce5dc] p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Update Information</h2>
-          
+
           <form onSubmit={handleUpdateName} className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">

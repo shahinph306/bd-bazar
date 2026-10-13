@@ -1,57 +1,3 @@
-// import Image from "next/image";
-// import banner from "../../public/basket.svg";
-// import RisingProductsPrices from "./components/RisingProductsPrices";
-// import AllProductsPrices from "./components/AllProducts";
-// import Link from "next/link";
-
-// export default async function Home() {
-//   const response = await fetch(
-//     "https://openapi.programming-hero.com/api/bazardor/products"
-//   );
-
-//   if (!response.ok) {
-//     throw new Error("Failed to fetch products");
-//   }
-
-//   const result = await response.json();
-
-//   // Adjust this line to match the API response structure.
-//   const products = Array.isArray(result)
-//     ? result
-//     : result.data?.products ?? result.data ?? result.products ?? [];
-
-//   return (
-//     <div>
-//       <div className="flex justify-between mx-auto container border pt-4 bg-base-100 mt-8 px-4">
-//         <div>
-//           <h1 className="font-bold text-4xl py-4">
-//             Todays Market Prices at a Glance
-//           </h1>
-
-//           <p className="text-gray-500 py-4">
-//             Prices of rice, pulses, oil, vegetables, fish, meat, eggs and spices.
-//           </p>
-
-//           <Link href="./components/AllProducts.tsx">
-//             <button className="bg-green-500 py-2 px-3 rounded-xl cursor-pointer">
-//             View all products
-//           </button>
-//           </Link>
-//         </div>
-
-//         <div>
-//           <Image src={banner} alt="Basket" width={400} height={400} />
-//         </div>
-//       </div>
-
-//       <RisingProductsPrices />
-
-//       <AllProductsPrices products={products} />
-//     </div>
-//   );
-// }
-
-
 
 import Image from "next/image";
 import banner from "../../public/basket.svg";
@@ -80,14 +26,13 @@ export default async function Home() {
 
   return (
     <main className="w-full">
-      {/* Shared container for all page sections */}
+      
       <div className="mx-auto w-full max-w-7xl px-4">
 
-        {/* Hero Section */}
         <section className="mt-8 flex w-full items-center justify-between gap-6 border border-gray-300 bg-base-100 px-4 py-6">
           <div className="flex-1">
             <h1 className="py-4 text-2xl font-bold sm:text-3xl lg:text-4xl">
-              Todays Market Prices at a Glance
+              Today's Market Prices at a Glance
             </h1>
 
             <p className="py-2 text-gray-500">
@@ -110,17 +55,14 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* Rising Prices */}
         <section className="w-full py-2">
           <RisingProductsPrices />
         </section>
 
-        {/* Decreasing Prices */}
         <section className="w-full py-2">
           <DecreasingProductPrices />
         </section>
 
-        {/* All Products */}
         <section id="all-products-section" className="w-full py-2">
           <AllProductsPrices products={products} />
         </section>

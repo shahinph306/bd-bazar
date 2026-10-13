@@ -15,7 +15,6 @@ interface Product {
   };
 }
 
-// নাম ইংরেজিতে রূপান্তর
 const productEnglishNames: Record<string, string> = {
   "katla-mach": "Katla Fish",
   "rui-mach": "Rui Fish",
@@ -61,7 +60,6 @@ export default async function CategoryPage({
   const { slug } = await params;
   const allProducts = await getProducts();
 
-  // এই ক্যাটাগরির প্রোডাক্টগুলো বাছাই
   const products = allProducts.filter((p) => p.category === slug);
   const categoryName = categoryNames[slug] || slug;
 
@@ -97,7 +95,7 @@ export default async function CategoryPage({
                     : "text-gray-500";
 
               return (
-                // ✅ ক্লিক করলে প্রোডাক্ট বিস্তারিত পেজে যাবে
+
                 <Link
                   key={product.id}
                   href={`/product/${product.id}`}
@@ -119,7 +117,7 @@ export default async function CategoryPage({
 
                   <div className="flex items-end justify-between">
                     <div>
-                      <p className="mb-1 text-xs text-gray-500">Todays Price</p>
+                      <p className="mb-1 text-xs text-gray-500">Today's Price</p>
                       <p className="text-lg font-bold text-gray-900">
                         <span className="mr-1 text-sm font-normal">৳</span>
                         {product.today.toLocaleString("en-IN")}
