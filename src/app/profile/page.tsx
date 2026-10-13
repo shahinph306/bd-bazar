@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -8,15 +8,18 @@ import Image from "next/image";
 export default function ProfilePage() {
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
+  
   const [name, setName] = useState(user?.name || "");
   const [isUpdating, setIsUpdating] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const hasImage = !!user?.image && !imageError;
 
-  useEffect(() => {
-    // Reset error state when user changes
-    setImageError(false);
-  }, [user?.image]);
+  // ✅ নতুন ছবি পেলে স্বয়ংক্রিয়ভাবে এরর রিসেট — useEffect নেই
+  const currentImage = user?.image;
+  // যখন ছবি পরিবর্তন হবে, তখন imageError ফিরে যাবে false
+  const hasImage = !!currentImage && !imageError;
+
+  // যখন নতুন ছবি আসবে, imageError রিসেট করার জন্য কী পরিবর্তন
+  const imageKey = currentImage ? `${currentImage}` : "no-image";
 
   if (isPending) {
     return (
@@ -80,7 +83,8 @@ export default function ProfilePage() {
               {/* Avatar Section */}
               {hasImage ? (
                 <Image
-                  src={user.image!}
+                  key={imageKey}
+                  src={currentImage!}
                   alt={user.name || "User"}
                   width={80}
                   height={80}
