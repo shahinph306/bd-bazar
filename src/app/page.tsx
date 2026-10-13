@@ -58,6 +58,7 @@ import banner from "../../public/basket.svg";
 import RisingProductsPrices from "../components/RisingProductsPrices";
 import AllProductsPrices from "../components/AllProducts";
 import HomeScrollButton from "../components/HomeScrollButton";
+import DecreasingProductPrices from "@/components/DecresingProductPrices";
 
 // ✅ SERVER COMPONENT — fetch data here
 export default async function Home() {
@@ -96,6 +97,7 @@ export default async function Home() {
       </div>
 
       <RisingProductsPrices />
+      <DecreasingProductPrices></DecreasingProductPrices>
 
       {/* ✅ Target for scroll */}
       <div id="all-products-section">
