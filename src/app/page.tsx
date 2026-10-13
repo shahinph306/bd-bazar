@@ -32,7 +32,7 @@ export default async function Home() {
         <section className="mt-8 flex w-full items-center justify-between gap-6 border border-gray-300 bg-base-100 px-4 py-6">
           <div className="flex-1">
             <h1 className="py-4 text-2xl font-bold sm:text-3xl lg:text-4xl">
-              Today's Market Prices at a Glance
+              Today&apos;s Market Prices at a Glance
             </h1>
 
             <p className="py-2 text-gray-500">

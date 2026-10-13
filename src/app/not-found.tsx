@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 
-export default function NotFound() {
+export default function NotFoundPage() {
   return (
     <section className="flex min-h-[420px] flex-1 flex-col items-center justify-center bg-[#F0F5F0] px-4 py-12 text-center">
       <div className="mb-3 text-6xl" role="img" aria-label="Shopping basket">
@@ -13,7 +13,7 @@ export default function NotFound() {
       </h1>
 
       <p className="mb-5 max-w-xl text-sm leading-6 text-gray-500 sm:text-base">
-        The product or page you're looking for has been removed or never was.
+        The product or page you&apos;re looking for has been removed or never was.
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-2">

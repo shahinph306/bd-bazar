@@ -13,7 +13,7 @@ export default function NotFound() {
       </h1>
 
       <p className="mb-5 max-w-xl text-sm leading-6 text-gray-500 sm:text-base">
-        The product or page you're looking for has been removed or never was.
+        The product or page you&apos;re looking for has been removed or never was.
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-2">
