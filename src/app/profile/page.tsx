@@ -161,16 +161,17 @@
 // }
 
 
-
-
-import { auth } from "@/auth";
-import Image from "next/image";
+// app/profile/page.tsx
+import { auth } from "@/lib/auth"; // ফাইলটি মূল ফোল্ডারে auth.ts হিসেবে থাকলে
 
 export default async function ProfilePage() {
-  const session = await auth();
+  // ✅ সঠিক পদ্ধতি — api.getSession() ব্যবহার করুন
+  const session = await auth.api.getSession();
   const user = session?.user;
 
-  if (!user) return <div>অনুগ্রহ করে লগইন করুন</div>;
+  if (!user) {
+    return <div className="p-6">অনুগ্রহ করে লগইন করুন</div>;
+  }
 
   return (
     <div className="max-w-2xl mx-auto p-6">
@@ -178,12 +179,11 @@ export default async function ProfilePage() {
       <p className="text-gray-500 mb-8">Manage your account information here.</p>
 
       <div className="bg-white rounded-lg shadow p-6 mb-6 flex items-center gap-4">
-        {/* প্রোফাইল ছবি */}
         {user.image ? (
           <img
             src={user.image}
             alt={user.name || "Profile"}
-            className="w-16 h-16 rounded-full object-cover border-2 border-green-500"
+            className="w-16 h-16 rounded-full object-cover"
             referrerPolicy="no-referrer"
           />
         ) : (
@@ -197,21 +197,20 @@ export default async function ProfilePage() {
           <p className="text-gray-500">{user.email}</p>
         </div>
 
-        <button className="ml-auto px-4 py-2 border border-red-200 text-red-600 rounded hover:bg-red-50 transition">
+        <button className="ml-auto px-4 py-2 border border-red-200 text-red-600 rounded hover:bg-red-50">
           Sign Out
         </button>
       </div>
 
-      {/* আপডেট ফর্ম */}
       <div className="bg-white rounded-lg shadow p-6">
         <h3 className="font-semibold mb-4">Update Information</h3>
         <input
           type="text"
           defaultValue={user.name || ""}
-          className="w-full p-3 border rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="w-full p-3 border rounded-lg mb-4"
           placeholder="আপনার নাম"
         />
-        <button className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition font-medium">
+        <button className="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
           Update
         </button>
       </div>
